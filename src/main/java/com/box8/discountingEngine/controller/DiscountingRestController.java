@@ -29,13 +29,6 @@ public class DiscountingRestController {
     @Autowired
     DiscountingEngineServices discountingEngineServices;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    @ResponseBody
-    public String test() throws IOException {
-        LOG.info("Initiated test method");
-        return discountingEngineServices.test();
-    }
-
     @RequestMapping(value = "/discount", method = RequestMethod.POST)
     @ResponseBody
     public ResponseData getDiscount(@RequestBody RequestData requestData) throws IOException {
@@ -43,15 +36,4 @@ public class DiscountingRestController {
         return discountingEngineServices.getDiscount(requestData);
     }
 
-
-    @RequestMapping(value = "/testing", method = RequestMethod.POST)
-    @ResponseBody
-    public String getDiscount(@RequestBody List<CartData> cartDatas) throws IOException {
-        LOG.info("Initiated getDiscount method");
-        StringBuilder s = new StringBuilder();
-        for (CartData cd : cartDatas) {
-            s.append(cd.toString());
-        }
-        return String.valueOf(s);
-    }
 }

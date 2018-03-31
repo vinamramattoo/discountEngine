@@ -22,16 +22,6 @@ public class DiscountingServicesImpl implements DiscountingEngineServices {
     private static Boolean cashBackValid = true;
 
     @Override
-    public String test() throws IOException {
-
-        String response = ConnectionUtil.getStringFromUrl(COUPON_CODE_DATA_URL);
-
-        CouponData data = new ObjectMapper().readValue(response, CouponData.class);
-
-        return response;
-    }
-
-    @Override
     public ResponseData getDiscount(RequestData requestData) throws IOException {
         ResponseData responseData = new ResponseData();
         CouponData data = getCouponData();

@@ -46,4 +46,13 @@ public class RequestData {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "\"RequestData\"{" +
+                "\"outletId\"=" + outletId +
+                ", \"couponCode\"='" + couponCode + '\'' +
+                ", \"cart_items\" =" + cart_items +
+                '}';
+    }
 }

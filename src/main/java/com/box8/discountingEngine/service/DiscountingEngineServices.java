@@ -15,8 +15,6 @@ import java.net.MalformedURLException;
 @Component
 public interface DiscountingEngineServices {
 
-    String test() throws IOException;
-
     ResponseData getDiscount(RequestData requestData) throws IOException;
 
 }

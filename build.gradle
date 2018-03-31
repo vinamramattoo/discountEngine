@@ -25,7 +25,9 @@ repositories {
 
 
 dependencies {
+    compile ("com.google.code.gson:gson:1.7.2")
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.0"
 }

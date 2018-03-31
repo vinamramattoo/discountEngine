@@ -33,10 +33,10 @@ public class CartData {
 
     @Override
     public String toString() {
-        return "CartData{" +
-                "product_id=" + product_id +
-                ", quantity=" + quantity +
-                ", unit_cost=" + unit_cost +
+        return "\"CartData\"{" +
+                "\"product_id\"=" + product_id +
+                ", \"quantity\"=" + quantity +
+                ", \"unit_cost\"=" + unit_cost +
                 '}';
     }
     boolean validate(CartData cartData){
