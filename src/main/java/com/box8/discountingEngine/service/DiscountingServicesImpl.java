@@ -24,8 +24,10 @@ public class DiscountingServicesImpl implements DiscountingEngineServices {
     @Override
     public ResponseData getDiscount(RequestData requestData) throws IOException {
         ResponseData responseData = new ResponseData();
+        messageFlag = 0;
+        validFlag = true;
+        cashBackValid = true;
         CouponData data = getCouponData();
-        double discountValue = getDiscountByCoupon(data, requestData);
         if(!requestData.validate(requestData)){
             messageFlag = 7;
             validFlag = false;
@@ -36,6 +38,7 @@ public class DiscountingServicesImpl implements DiscountingEngineServices {
             responseData.setDiscount(NO_DISCOUNT);
             return responseData;
         }
+        double discountValue = getDiscountByCoupon(data, requestData);
         responseData.setDiscount(discountValue);
 
         responseData.setMessage(getMessageForFlag());
@@ -48,7 +51,8 @@ public class DiscountingServicesImpl implements DiscountingEngineServices {
 
     private double getDiscountByCoupon(CouponData data, RequestData requestData) {
         double discountedValue = 0;
-
+        String upCase = requestData.getCouponCode().toUpperCase();
+        requestData.setCouponCode(requestData.getCouponCode().toUpperCase());
         CouponCode c = null;
         for (CouponCode cc : data.getCoupon_codes()) {
             if (Objects.equals(cc.getCode(), requestData.getCouponCode())) {
@@ -69,8 +73,7 @@ public class DiscountingServicesImpl implements DiscountingEngineServices {
             return NO_DISCOUNT;
         }
         //setting the code to always uppercase
-        String upCase = c.getCode().toUpperCase();
-        c.setCode(upCase);
+
         if(!c.getApplicable_outlet_ids().isEmpty()){
             if (!c.getApplicable_outlet_ids().contains(requestData.getOutletId())) {
                 //return no discount
@@ -181,6 +184,7 @@ public class DiscountingServicesImpl implements DiscountingEngineServices {
         double totalValue = getTotalValue(requestData);
         if (couponCode.getMinimum_delivery_amount_after_discount() > totalValue - discount) {
             messageFlag= 5;
+            cashBackValid=false;
             discount = totalValue - couponCode.getMinimum_delivery_amount_after_discount();
         }
         if (discount < 0) {
@@ -223,12 +227,14 @@ public class DiscountingServicesImpl implements DiscountingEngineServices {
                 break;
             }
         }
+
         if (c == null) {
             messageFlag = 2;
             validFlag = false;
             cashBackValid = false ;
             return NO_DISCOUNT;
         }
+
         if(!cashBackValid){
             return NO_DISCOUNT;
         }
@@ -241,7 +247,7 @@ public class DiscountingServicesImpl implements DiscountingEngineServices {
             case 1 : return "invalid coupon code";
             case 2 : return "invalid Outlet ID";
             case 3 : return "invalid Date";
-            case 4 : return "Success!! discount exceeds max setting it to max ";
+            case 4 : return "Success!! discount exceeds max setting it to max";
             case 5 : return "Success!! total value below min delivery amount adjusting appropriately";
             case 6 : return "invalid coupon discount type";
             case 7 : return "invalid input json";

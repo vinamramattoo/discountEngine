@@ -5,7 +5,7 @@ public class CartData {
 
    private Integer product_id;
    private Integer quantity;
-   private double unit_cost;
+   private Double unit_cost;
 
     public Integer getProduct_id() {
         return product_id;
@@ -23,11 +23,11 @@ public class CartData {
         this.quantity = quantity;
     }
 
-    public double getUnit_cost() {
+    public Double getUnit_cost() {
         return unit_cost;
     }
 
-    public void setUnit_cost(double unit_cost) {
+    public void setUnit_cost(Double unit_cost) {
         this.unit_cost = unit_cost;
     }
 
@@ -40,6 +40,6 @@ public class CartData {
                 '}';
     }
     boolean validate(CartData cartData){
-        return !(cartData.getProduct_id() == null || cartData.getQuantity() == null || cartData.getQuantity() == null);
+        return !(cartData.getProduct_id() == null || cartData.getQuantity() == null || cartData.getUnit_cost() == null );
     }
 }

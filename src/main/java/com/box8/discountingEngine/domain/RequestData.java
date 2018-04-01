@@ -36,7 +36,7 @@ public class RequestData {
     if(requestData.getOutletId() == null){
         return false;
     }
-    else if(requestData.getCouponCode().equals(null) || requestData.getCouponCode().equals("")){
+    else if(requestData.getCouponCode() == null || requestData.getCouponCode().equals("")){
         return false;
     }
         for (CartData cd: requestData.getCart_items()) {
