@@ -9,23 +9,4 @@ No database is required
 
 29 test cases are included written in junit with Mockito
 
-input takes json of format
-{
- "outletId" = 1,
- "couponCode" = "BOGO",
- "cart_items" =[
-                 {
-                 "product_id" = "1",
-                 "quantity" = 1 ,
-                 "unit_cost" = 100 
-                 },
-
-                 {
-                 "product_id" = "2",
-                 "quantity" = 2 ,
-                 "unit_cost" = 200 
-                 }
- ]
-
-
-}
+input takes json of format can be found in input.json as readme.md is rendering it wrongly
